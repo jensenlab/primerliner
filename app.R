@@ -56,7 +56,11 @@ align_chars <- function(chars) {
   Reduce(align_mat, lapply(chars[2:length(chars)], str2mat), str2mat(chars[1]))
 }
 
-align_oligos <- function(forward, reverse) {
+align_oligos <- function(forward, reverse, remove_spaces=TRUE) {
+  if (remove_spaces) {
+    forward <- gsub("\\s", "", forward)
+    reverse <- gsub("\\s", "", reverse)
+  }
   nf <- length(forward)
   nr <- length(reverse)
   strs <- character(0)
